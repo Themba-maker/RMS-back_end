@@ -1,0 +1,20 @@
+{
+  "name": "rms-back_end",
+  "version": "1.0.0",
+  "description": "RMS project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start ": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Themba-maker/RMS-back_end.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Themba-maker/RMS-back_end/issues"
+  },
+  "homepage": "https://github.com/Themba-maker/RMS-back_end#readme"
+}
