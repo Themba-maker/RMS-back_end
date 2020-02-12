@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
-var cors = require('cors')
+var cors = require('cors');
 const mysqlConn= require('./conn/conn');
 const bodyParser = require('body-parser');
 
@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
   });
 // api routes
 
- app.use('/', require('./routes/add_landlord'));
+ app.use('/', require('./routes/landlord'));
 
 
  
