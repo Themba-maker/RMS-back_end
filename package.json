@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Themba-maker/RMS-back_end/issues"
   },
-  "homepage": "https://github.com/Themba-maker/RMS-back_end#readme"
+  "homepage": "https://github.com/Themba-maker/RMS-back_end#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.2"
+  }
 }
