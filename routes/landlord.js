@@ -1,23 +1,33 @@
 const express = require('express');
 router = express.Router();
 con = require('../conn/conn');
+var crypto = require('crypto');
+
 
 router.post('/add',(req,res)=>{
-
+ 
+  /*  function landlordCode(len)
+    {
+        return crypto.randomBytes(Math.cell(len/2)).toString('hex').slice(0,len);
+    }
+*/
+   // var lord_id = landlordCode(7);
+    //console.log(lord_id);
+    //"lord_id" :lord_id
     var lordData = {
 
-        "fname" : req.body.fname,
-        "lname" : req.body.lname,
-        "id_no" : req.body.id_no,
-        "email" : req.body.email,
-        "cell":req.body.cell,
-         "id_doc":req.body.id_doc,
-         "proof_res":req.body.proof_res,
-         "tax_doc":req.body.tax_doc
-
+        fname:req.body.fname,
+        lname:req.body.lname,
+        id_no:req.body.id_no,
+        email:req.body.email,
+        cell:req.body.cell,
+         campus_loc:req.body.campus_loc,
+         title:req.body.title,
+         pwd:req.body.pwd
+         
     };
 
-    if(!userData){
+    if(!lordData){
         res.send({
             code : 400,
             message : "No data sent"

@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(bodyParser.urlencoded({
+    extended: false
+ }));
 
 
 app.use(function (req, res, next) {
