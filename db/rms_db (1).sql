@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2020 at 01:48 PM
+-- Generation Time: Feb 13, 2020 at 09:14 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -47,6 +47,40 @@ INSERT INTO `landlord` (`fname`, `lname`, `id_no`, `email`, `cell`, `campus_loc`
 ('themba', '0', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', ''),
 ('themba', 'ntuli', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', 'gsjhkjlkjh55'),
 ('thembaa', 'ntuli', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', 'gsjhkjlkjh55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL,
+  `First_name` longtext DEFAULT NULL,
+  `Last_name` longtext DEFAULT NULL,
+  `email` longtext DEFAULT NULL,
+  `passwrd` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

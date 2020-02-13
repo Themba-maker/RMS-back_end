@@ -23,6 +23,8 @@ app.use(function (req, res, next) {
 
  app.use('/', require('./routes/landlord'));
  app.use('/', require('./routes/login'));
+ app.use('/', require('./routes/landlord'));
+ app.use('/', require('./routes/register'));
 
 
  
