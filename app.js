@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
 // api routes
 
  app.use('/', require('./routes/landlord'));
+ app.use('/', require('./routes/login'));
 
 
  
