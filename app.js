@@ -4,7 +4,9 @@ const app = express();
 var cors = require('cors');
 const mysqlConn= require('./conn/conn');
 const bodyParser = require('body-parser');
+const upload = require('express-fileupload');
 
+app.use(upload);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -23,7 +25,7 @@ app.use(function (req, res, next) {
 
  app.use('/', require('./routes/landlord'));
  app.use('/', require('./routes/login'));
- app.use('/', require('./routes/landlord'));
+ app.use('/', require('./routes/res_application'));
  app.use('/', require('./routes/register'));
 
 
