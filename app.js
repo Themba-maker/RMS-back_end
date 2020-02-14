@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
  app.use('/', require('./routes/login'));
  app.use('/', require('./routes/res_application'));
  app.use('/', require('./routes/register'));
-
+ app.use('/', require('./routes/admin'));
 
  
 
