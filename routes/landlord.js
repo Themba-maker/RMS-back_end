@@ -4,16 +4,8 @@ con = require('../conn/conn');
 var crypto = require('crypto');
 
 
-router.post('/add',(req,res)=>{
- 
-  /*  function landlordCode(len)
-    {
-        return crypto.randomBytes(Math.cell(len/2)).toString('hex').slice(0,len);
-    }
-*/
-   // var lord_id = landlordCode(7);
-    //console.log(lord_id);
-    //"lord_id" :lord_id
+router.post('/reglord',(req,res)=>{
+
     var lordData = {
 
         fname:req.body.fname,
@@ -27,6 +19,7 @@ router.post('/add',(req,res)=>{
          
     };
 
+    
     if(!lordData){
         res.send({
             code : 400,
@@ -35,9 +28,10 @@ router.post('/add',(req,res)=>{
     }
 
     var sql = "INSERT INTO landlord set ?";
-   con.query(sql, [lordData], function (err, result) {
+   con.query(sql,[lordData], function (err, result) {
      if(err){
          res.send({
+                data:result,
                 status: 401,
                 error: err 
          });
@@ -51,5 +45,19 @@ router.post('/add',(req,res)=>{
      }
     });
 });
+////
+router.get('/a',function(req,res){
+    var sql = "SELECT * FROM landlord";
 
+    con.query(sql,function(err, result){
+        if(err){
+            res.send('err')
+        }else{
+            res.send({data:result})
+        }
+    })
+})
+
+///
 module.exports = router;
+
