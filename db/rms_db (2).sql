@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2020 at 09:14 AM
+-- Generation Time: Feb 18, 2020 at 08:29 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -31,9 +31,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `landlord` (
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
-  `id_no` int(13) NOT NULL,
+  `id_no` varchar(13) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `cell` int(10) NOT NULL,
+  `cell` varchar(10) NOT NULL,
   `campus_loc` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `pwd` varchar(255) NOT NULL
@@ -44,9 +44,30 @@ CREATE TABLE `landlord` (
 --
 
 INSERT INTO `landlord` (`fname`, `lname`, `id_no`, `email`, `cell`, `campus_loc`, `title`, `pwd`) VALUES
-('themba', '0', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', ''),
-('themba', 'ntuli', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', 'gsjhkjlkjh55'),
-('thembaa', 'ntuli', 2147483647, 'thembaantuli@gmail.com', 835113602, 'Soshanguve South', 'Mr', 'gsjhkjlkjh55');
+('themba', '0', '2147483647', 'thembaantuli@gmail.com', '835113602', 'Soshanguve South', 'Mr', ''),
+('themba', 'ntuli', '2147483647', 'thembaantuli@gmail.com', '835113602', 'Soshanguve South', 'Mr', 'gsjhkjlkjh55'),
+('thembaa', 'ntuli', '2147483647', 'thembaantuli@gmail.com', '835113602', 'Soshanguve South', 'Mr', 'gsjhkjlkjh55'),
+('CTHE', 'ZULU', '960325698456', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba'),
+('CTHE', 'ZULU', '960325698456', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba'),
+('CTHE', 'ZULU', '1111111111111', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba'),
+('CTHE', 'ZULU', '1111111111111', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba'),
+('CTHE', 'ZULU', '0000000000000', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba'),
+('CTHE', 'ZULU', '8888888888888', 'sthe@gmail.com', '0717456935', 'PTA', 'Mr', 'jfnnnajfbbqaba');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `res_appli`
+--
+
+CREATE TABLE `res_appli` (
+  `student_num` int(9) NOT NULL,
+  `camp_name` varchar(255) NOT NULL,
+  `res_name` varchar(255) NOT NULL,
+  `res_proof` varchar(255) NOT NULL,
+  `isDisable` tinyint(1) NOT NULL,
+  `disability_doc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -59,7 +80,8 @@ CREATE TABLE `student` (
   `First_name` longtext DEFAULT NULL,
   `Last_name` longtext DEFAULT NULL,
   `email` longtext DEFAULT NULL,
-  `passwrd` longtext DEFAULT NULL
+  `passwrd` longtext DEFAULT NULL,
+  `student_num` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
