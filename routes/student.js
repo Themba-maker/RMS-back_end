@@ -7,6 +7,7 @@ router.post('/addstudent',(req,res)=>{
     
         student_num:req.body.student_num,
         first_name:req.body.first_name,
+        last_name:req.body.last_name,
         email:req.body.email,
          id_no:req.body.id_no,
          pwd:req.body.pwd
