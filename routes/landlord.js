@@ -15,6 +15,7 @@ router.post('/addlord',(req,res)=>{
          fname:req.body.fname
        
     }; 
+
     
     var sql = "INSERT INTO landlord set ?";
     con.query(sql,[lordData],function(err,result){
