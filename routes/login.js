@@ -24,9 +24,9 @@ con = require('../conn/conn');
 
 
 
-     /* / router.post('/insert',function(res,post){
+     /*  router.post('/insert',function(res,post){
 connection.query("insert INTO studentTbl SET ? " ,res.body,function(err,rs){
-res.render('insert success')
+res.render('insert success') fokza
 })
 
        })
