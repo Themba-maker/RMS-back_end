@@ -4,7 +4,7 @@ con = require('../conn/conn');
 
 
 
-   router.get('/st', (req,res)=>{
+   router.get('/ll', (req,res)=>{
 
     let email =( req.body.email)
 
@@ -19,6 +19,38 @@ con = require('../conn/conn');
            }
 
        })
+
+
+     router.get('/st', (req,res)=>{
+    let email=( req.body.email)
+
+   
+     con.query('SELECT * from student where email= ? ',[email],function(error,results,fields){
+    
+       if(error){ throw(error)
+         
+       }
+       else{
+        
+               return res.send({data:results})
+           }
+       })
+
+
+       /*app.get('/logout', (req, res, next) => {
+        req.logOut()
+        console.log('Youve been logged out'),
+        res.redirect('/login')*/
+   
+   })
+
+
+
+
+
+
+
+
 
 
 
