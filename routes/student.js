@@ -1,49 +1,93 @@
 const express = require('express');
-router = express.Router();
-con = require('../conn/conn');
+const router = express.Router();
+const mysql = require('mysql');
+const  db = require('../conn/conn');
 
-router.post('/addstudent',(req,res)=>{
-    let studentData = {
-    
-        student_num:req.body.student_num,
-        first_name:req.body.first_name,
-        last_name:req.body.last_name,
-        email:req.body.email,
-         id_no:req.body.id_no,
-         pwd:req.body.pwd
-       }; 
- 
-    var sql = "INSERT INTO student set ?";
-    con.query(sql,[studentData],function(err,result){
 
-        if(err)throw err;
+//register student 
+
+router.post('/reg', function(req, res){  
+
+    var post = {
+        "First_name": req.body.First_name,
+        "Last_name": req.body.Last_name,
+        "email": req.body.email,
+        "passwrd": req.body.passwrd
+    };
+
+
+    var email = req.body.email;
+    var myQuery1 = "SELECT * FROM student WHERE email = ?";
+    db.query(myQuery1,[email],function(err,results){
         
+        if(results.length > 0){
+
+            res.send({
+                data : results,
+                code : 200,
+                message : "Sorry, user already exist!"
+
+            })
+
+        }else{
+                var myQuery = "INSERT INTO student SET ?";
+                db.query(myQuery, [post], function(err, results){
+                    if(err){
+                        
+                        res.send({
+                            data : err,
+                            code : 400,
+                            message : "The was an error !!!"
+                        });
+                            
+                    }else{
+                        
+                        console.log("results")
+                        res.send({
+                            data : results,
+                            code : 200,
+                            message : "Registered Successfully..."
+            
+                        })
+                    }
+            })
+        }
+        
+    })
+});
+
+//Get all student
+router.get('/getstuds/',(req,res)=>{
+    db.query('SELECT * FROM student',(err,rows,fields)=>{
+        if(!err)
+            res.send(rows);
         else
-        { 
-        con.query('select * from student',function(err,result){
-            if (err) throw err;
-            else{
-               
-                return res.send({result})
-            }
-
-        })
-    }
-})
-
-})
-
-router.get('/getstudent',(req,res)=>{
-
-    con.query('SELECT * from student',function(err,result){
-    if(err) throw err;
+            console.log(err);
+    })
     
-    else
-    {
-        return res.send({result});
-    }
-   })
+});
 
-})
 
-module.exports = router;
+//Get a student
+router.get('/getstud/:id',(req,res)=>{
+    db.query('SELECT * FROM student WHERE id = ?',[req.params.id],(err,rows,fields)=>{
+        if(!err)
+            res.send(rows);
+        else
+            console.log(err);
+    })
+    
+});
+
+//Delete a student
+router.delete('/delstud/:id',(req,res)=>{
+    db.query('DELETE FROM student WHERE id = ?',[req.params.id],(err,rows,fields)=>{
+        if(!err)
+            res.send('Deleted successfully');
+        else
+            console.log(err);
+    }) 
+});
+
+
+module.exports = router ;
