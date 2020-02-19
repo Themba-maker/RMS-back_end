@@ -7,7 +7,7 @@ const mysqlConn =mysql.createConnection({
   host:'localhost',
   user:'root',
   password:'',
-  database:'db_rms'
+  database:'rms_db'
 
 })
 
