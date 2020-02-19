@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2020 at 09:56 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Feb 19, 2020 at 10:56 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,6 +59,24 @@ INSERT INTO `landlord` (`fname`, `lname`, `id_no`, `email`, `cell`, `campus_loc`
 ('', 'mathe', 2147483647, 'ny@gmail.com', 826879542, 'Soshangve', 'MS', '78925'),
 ('', 'mathe', 2147483647, 'ny@gmail.com', 826879542, 'Soshangve', 'MS', '78925'),
 ('', ' jhyugkj', 2147483647, 'kjlijjk,', 2145055414, 'E', 'b', 'dryutytuu');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lord`
+--
+
+CREATE TABLE `lord` (
+  `reg_proof` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lord`
+--
+
+INSERT INTO `lord` (`reg_proof`) VALUES
+('uploadID.pdf'),
+('uploadCV.pdf');
 
 -- --------------------------------------------------------
 
