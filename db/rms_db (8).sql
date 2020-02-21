@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2020 at 10:56 AM
+-- Generation Time: Feb 20, 2020 at 08:04 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `rms_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(255) DEFAULT NULL,
+  `lname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `pwd` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -115,6 +129,12 @@ INSERT INTO `student` (`id`, `firstName`, `lastName`, `email`, `password`) VALUE
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -123,6 +143,12 @@ ALTER TABLE `student`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student`
