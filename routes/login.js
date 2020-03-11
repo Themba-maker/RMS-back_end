@@ -54,6 +54,14 @@ const upload = multer({storage:storage});
 						if (results.length>0) {
 							res.send('logged in')
 						
+						 	//req.session.sesEmail = email;
+								//console.log(req.session.sesEmail);
+								// res.send({
+								// 	data : results,
+								// 	code : 200,
+								// 	message : "logged in Successfully..."
+					
+								// })
 						}
 						else{
 							res.send("user not found")
@@ -64,7 +72,29 @@ const upload = multer({storage:storage});
 									   
 							
 						})
+		
 
+
+				// router.get('/stulogin', function(req, res) {
+	
+				// 	var email = req.body.email;
+				// 	var pwd = req.body.pwd;
+					
+				// 	var sql = "SELECT * FROM `student` WHERE email = '"+ email +"' AND pwd = '"+ pwd +"'";
+				//     //var sql = "SELECT * FROM student WHERE email = ? AND pwd = ?";
+				// 	con.query(sql, [email, pwd], function(error, results, fields) {
+						
+				// 		if(error) throw error
+				// 		else{
+				// 			res.send("successfully logged");
+				// 			req.session.userID = email;
+				// 			console.log(req.session.userID);
+				// 			  }
+				
+				// 		})
+				// 	})
+
+				
             //login working with session
 				router.get('/userLogin', function(req, res) {
 	
@@ -113,7 +143,7 @@ router.post('/logout', function(req,res){
 });
 
 
-router.post('/uploadupload',upload.single('reg_proof'),(req,res)=>{
+router.post('/upload5',upload.single('reg_proof'),(req,res)=>{
     
     reg_proof = req.file.path;
 
@@ -135,20 +165,19 @@ router.post('/uploadupload',upload.single('reg_proof'),(req,res)=>{
 //
 router.post('/upload5',upload.single('images'),(req,res)=>{
     
-    
+    reg_proof = req.file.path;
 	let post={
 	  email:req.body.email,
 	  propery_name:req.body.propery_name,
 	  propery_owner:req.body.propery_owner,
 	  city:req.body.city,
 	  postal_code:req.body.postal_code,
-	  street_address:req.body.street_address,
-	  reg_proof = req.file.path
+	  street_address:req.body.street_address
             }
-    if (images) {
-		var myQuery = "INSERT INTO property SET ?";
+    if (reg_proof) {
+		var myQuery = "INSERT INTO student SET ?";
                 con.query(myQuery, [post], function(err, results){
-				 	if (err) {
+					if (err) {
 						res.send("property not added");  
 					}
 					else{
@@ -157,15 +186,15 @@ router.post('/upload5',upload.single('images'),(req,res)=>{
 					}
 
 				})
-        // con.query("INSERT INTO property(images) VALUES ('"+ images + "')", [images], function(err,results){
-        //     if (err) {
-        //         res.send("upload document - failed.........file not received");  
-        //     }
-        //     else{
-        //         return res.send({results,
-        //           message: " successful!!! --file received"})
-        //     }
-        //     }) 
+        con.query("INSERT INTO property(images) VALUES ('"+ images + "')", [images], function(err,results){
+            if (err) {
+                res.send("upload document - failed.........file not received");  
+            }
+            else{
+                return res.send({results,
+                  message: " successful!!! --file received"})
+            }
+            }) 
     } else {
         res.send("PLEASE UPLOAD YOUR DOCUMENT");
     } 
