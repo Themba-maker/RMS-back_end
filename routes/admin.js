@@ -1,9 +1,6 @@
-const mysql = require('mysql');
-const express = require('express');
-const app = express();
 const con= require('../conn/conn');
-const router = express.Router();
-
+const express = require('express');
+router = express.Router();
 
 
 router.post('/reg', function(req, res){  
