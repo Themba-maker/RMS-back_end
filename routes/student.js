@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 const  db = require('../conn/conn');
-
-//register student 
-
+ 
+//register student
 router.post('/reg', function(req, res){  
 
     var post = {
@@ -19,7 +18,7 @@ router.post('/reg', function(req, res){
     };
 
 
-    var email = req.body.email;ih
+    var email = req.body.email;
     var myQuery1 = "SELECT * FROM student WHERE email = ?";
     db.query(myQuery1,[email],function(err,results){
         
@@ -60,8 +59,8 @@ router.post('/reg', function(req, res){
 });
 
 //Get all student
-router.get('/getstud/',(req,res)=>{
-    db.query('SELECT * FROM student',(err,rows,fields)=>{
+router.get('/getst/',(req,res)=>{
+    db.query('SELECT email FROM student',(err,rows,fields)=>{
         if(!err)
             res.send(rows);
         else
@@ -73,6 +72,7 @@ router.get('/getstud/',(req,res)=>{
 
 //Get a student
 router.get('/getstud/:id',(req,res)=>{
+    req.body.id
     db.query('SELECT * FROM student WHERE id = ?',[req.params.id],(err,rows,fields)=>{
         if(!err)
             res.send(rows);
@@ -102,30 +102,14 @@ router.get('/getResStatus',(req,res)=>{
     
 });
 
+router.get('/getproperty',(req,res)=>
+    db.query('SELECT * FROM property',(err,rows,fields)=>{
+        if(!err)
+            res.send(rows)
+        else
+            console.log(err)
+    })
+    
+)
 
-///////////////////////////////////////////////////////////////////////////////////////////
- 
-// router.post('/', (ctx) => {
-//     const data = ctx.request.body;
-//     const errors = {};
-	
-// 	if (!String(data.name).trim()) {
-// 	errors.name = ['Name is required'];
-//  	}
-	
-//  	if (!(/^[\-0-9a-zA-Z\.\+_]+@[\-0-9a-zA-Z\.\+_]+\.[a-zA-Z]{2,}$/).test(String(data.email))) {
-//  		errors.email = ['Email is not valid.'];
-// 	}
-	
-//  	if (Object.keys(errors).length) {
-//  		return ctx.error(400, {errors});
-// 	}
-	
-//  	const user = await User.create({
-//  			name: data.name,
-// 		email: data.email,
-//  	});
-	
-//  	ctx.body = user.toJSON();
-//  });
  module.exports = router ;

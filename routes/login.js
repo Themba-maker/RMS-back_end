@@ -115,7 +115,7 @@ router.post('/logout', function(req,res){
 
 router.post('/uploadupload',upload.single('reg_proof'),(req,res)=>{
     
-    reg_proof = req.file.path;
+    //reg_proof = req.file.path;
 
     if (reg_proof) {
         con.query("INSERT INTO reg(reg_proof) VALUES ('"+ reg_proof + "')", [reg_proof], function(err,results){
@@ -142,8 +142,8 @@ router.post('/upload5',upload.single('images'),(req,res)=>{
 	  propery_owner:req.body.propery_owner,
 	  city:req.body.city,
 	  postal_code:req.body.postal_code,
-	  street_address:req.body.street_address,
-	  reg_proof = req.file.path
+	  street_address:req.body.street_address
+	  //reg_proof = req.file.path
             }
     if (images) {
 		var myQuery = "INSERT INTO property SET ?";
