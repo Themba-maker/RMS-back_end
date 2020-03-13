@@ -52,6 +52,7 @@ app.get('/',(req,res)=>{
  app.use('/', require('./routes/login'));
  app.use('/', require('./routes/admin'));
  app.use('/', require('./routes/resapplication'));
+ app.use('/', require('./routes/profile'));
 
  // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 7000;

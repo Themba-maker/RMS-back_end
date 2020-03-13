@@ -222,6 +222,54 @@ router.post('/addprofile',upload.single('proof_reg'),(req,res)=>{
     } 
 });
 
-//
-module.exports = router ;
+
+router.post('/loginst', function (req, res) {
+
+	var email= req.body.email;
+	var password = req.body.st_password;
+
+	if (email && password) {
+		
+		var query = 'SELECT * FROM student WHERE email = ? AND password= ?';
+
+		db.query(query, [email, password], function (error, results) {
+
+			if (error) {
+				// console.log(error);
+				res.json({
+					message: error,
+					status: 400
+				})
+			} else {
+				if (results.length > 0) {
+					var payload = {
+						id: results[0].id,
+						name: results[0].firstname,
+						lastName: results[0].lastname
+					};
+					var token = jwt.sign(payload, secretOrKey, { expiresIn: 60 * 5 }); //token expires in 5 minutes
+
+					res.json({
+						data: [results[0].firstname+ " " + results[0].lastname],
+						message: " student LoggedIn Successfully",
+						status: 200,
+						token: token
+					});
+				} else {
+					res.json({
+						status: 401,
+						message: "Incorect student number or password!"
+					})
+				}
+			}
+		});
+	}
+
+});
+
+
+
+
+
+module.exports = router;
 
