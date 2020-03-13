@@ -1,11 +1,14 @@
-const con= require('../conn/conn');
-const express = require('express');
-router = express.Router();  
-const multer= require('multer');
-const path = require('path');
+
+var mysql = require('mysql');
+var express = require('express');
+var session = require('express-session');
+const jwt = require('jsonwebtoken')
+const router = express.Router();
+const bodyParser = require('body-parser');
+const mysqlConn= require('../conn/conn');
 
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: function(req,file,cb){
         cb(null, "./upload");
     },
@@ -241,7 +244,7 @@ router.post('/loginst', function (req, res) {
 					status: 400
 				})
 			} else {
-				if (results.length > 0) {
+				if (results.length > 0) {  
 					var payload = {
 						id: results[0].id,
 						name: results[0].firstname,
@@ -259,13 +262,155 @@ router.post('/loginst', function (req, res) {
 					res.json({
 						status: 401,
 						message: "Incorect student number or password!"
-					})
+					})/
 				}
 			}
 		});
 	}
 
 });
+
+
+
+
+
+router.get('/pro',function(req,res){
+
+var name = req.body.name
+var surname = req.body.surname
+ var email = req.body.email;
+
+ var sql = "select s.fname , s.lname, s.email, p.property_name, s.cell, id_num FROM  student s , property p where p.email = s.prop_email"
+con.query(sql,[name,surname,email],function(err,results){
+
+	if (!err)
+	{
+		res.send(results)
+		console.log("results")
+	}else{
+
+		throw(err)
+	}
+
+}) 
+
+
+})*/
+
+
+
+router.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.json());
+
+router.post('/login', function(request, response,error) {
+	let user = request.body.email;
+	let user_pass = request.body.password;
+	var userType = request.body.userType;
+	
+
+	if (!user || !user_pass ){
+		 return response.send({ msg: 'Please enter all fields' });
+	}
+	if (user_pass.length < 6) {
+		return response.send({ msg: 'Password must be at least 6 characters' });
+	  }
+	if ( user && user_pass) 
+	{
+		if(userType == 1 )
+		{				
+		mysqlConn.query('SELECT * FROM student  WHERE email=? AND password=?', [user,user_pass], function(error, results, fields){		
+			if (results.length>0) { 
+				jwt.sign({user}, 'secretkey', { expiresIn: '30s' }, (err, token) => {
+					response.json({
+						token,
+					 user:results
+					});
+				  });	
+			} 
+			else {
+				response.send('Incorrect  user_id and/or user_pass...!');
+				console.log('incorrect pass or username.....');
+				response.end();
+			}			 	
+		});
+		}
+		else if(userType == 2 ){
+			mysqlConn.query('SELECT * FROM landlord WHERE email = ? AND password = ?', [user , user_pass], function(error, results, fields) {
+				if (results.length>0) {
+					jwt.sign({user}, 'secretkey', { expiresIn: '30s' }, (err, token) => {
+						response.json({
+							token,
+						 user:results
+						});
+					  });
+
+				} else {
+					response.send('Incorrect  user_id and/or user_pass...!');
+					console.log('incorrect pass or username.....');
+					response.end();
+				}	
+            })
+		}else {
+				mysqlConn.query('SELECT * FROM admin WHERE email = ? AND password = ?', [user , user_pass], function(error, results, fields) {
+				if (results.length>0) 
+				{
+					jwt.sign({user}, 'secretkey', { expiresIn: '30s' }, (err, token) => {
+						response.json({
+							token,
+						 user:results
+						});
+					  });		
+				} else {
+					response.send('Incorrect  user_id and/or user_pass...!');
+					console.log('incorrect pass or username.....');
+					response.end();
+				}})
+			}};
+});
+router.get('/logout', (req, res) => {
+	console.log( 'You are logged out');
+	res.redirect('/login');
+  });
+
+  
+router.get('/_login', function(req, res) {
+
+    var email = req.body.email;
+    var password = req.body.password;
+    
+    if(!email || !password)
+    {
+        res.send({message:'enter all the fields dkashdjhdasjd'})
+	}
+
+    mysqlConn.query('select * from student where email =? AND password =?',[email,password],(error,results)=>{  
+       if(error)
+       throw error;
+             
+                else
+                {
+                     
+                      jwt.sign({email},'secretkey',{expiresIn:'60s'},(err,token)=>{
+                        res.json({
+                            token,
+                            data:results
+                        });
+                       console.log(results)
+                        
+                    });
+                }
+                })
+ });
+
+
+ 
+
+
 
 
 
