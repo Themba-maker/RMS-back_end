@@ -77,7 +77,7 @@ const upload = multer({storage:storage});
 					con.query(sql, [email, password], function(error, results, fields) {
 					
 						if (results.length>0) {
-							res.send("successfully logged")
+							res.send("successfully logged in")
 						 	req.session.sesEmail = email;
 								console.log(req.session.sesEmail);
 						}
