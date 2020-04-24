@@ -4,10 +4,11 @@ const express = require('express');
 
 const mysqlConn =mysql.createConnection({
 
-  host:'localhost',
-  user:'root',
-  password:'',
-  database:'rms_db'
+  host:'buljpn6dt2rhf0t6npic-mysql.services.clever-cloud.com',
+  user:'u46fxj2s6t5drq7d',
+  password:'3D3EVvqjVkvWzK4xcrzF',
+  database:'buljpn6dt2rhf0t6npic',
+  port:'3306'
 
 })
 
